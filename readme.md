@@ -24,3 +24,6 @@ The oAuth2 server is now configured. You can generate a bearer token with full a
 
 	php artisan generate-api-token
 	
+The documentation for the server can be found at https://documenter.getpostman.com/view/133903/netsensia-oauth2-server/6YsWxPw
+
+	
