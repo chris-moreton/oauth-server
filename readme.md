@@ -7,6 +7,10 @@
 Fill in the database details, then install the Composer dependencies.
 
 	composer install
+	
+Generate the application key
+
+    php artisan key:generate
 
 Create the database tables
 
