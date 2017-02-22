@@ -11,6 +11,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        if (App::environment() === 'production') {
+            exit('Please don\'t do this!');
+        }
+        
+        Eloquent::unguard();
+        
+        $tables = [
+            'users',
+        ];
+        
+        foreach ($tables as $table) {
+            DB::table($table)->truncate();
+        }
+           
+        $this->call(UsersTableSeeder::class);
     }
 }

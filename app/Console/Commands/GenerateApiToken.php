@@ -40,7 +40,7 @@ class GenerateApiToken extends Command
     {
         $user = User::find(1);
         
-        $token = $user->createToken('Token Name', ['*'])->token();
+        $token = $user->createToken('Token Name', ['*'])->accessToken;
         
         echo PHP_EOL;
         echo $token . PHP_EOL;
