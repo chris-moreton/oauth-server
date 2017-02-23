@@ -26,7 +26,8 @@ Generate test users (optional)
 
 	php artisan db:seed
 	
-The oAuth2 server is now configured. You can generate a bearer token with full access using:
+The oAuth2 server is now configured. You can generate a bearer token with full access using. The token can be used to bypass the need
+to perform a password grant or client credentials grant (both of which return bearer tokens themselves).
 
 	php artisan generate-api-token
 	
