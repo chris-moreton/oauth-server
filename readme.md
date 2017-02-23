@@ -1,5 +1,7 @@
-# oAuth2 Server
+# Netsensia Authentication Server
 
+An authentication server with oAuth2 support.
+ 
 ## Installation
 
 	cp .env.example .env
@@ -31,9 +33,18 @@ The oAuth2 server is now configured. You can generate a bearer token with full a
 The full documentation for the server can be found at 
 
 https://documenter.getpostman.com/view/133903/netsensia-oauth2-server/6YsWxPw
-    
+
 ## Quick docs
 
+### Importing Old Users
+
+You may add users directly to the users table including using their passwords encrypted using a legacy encryption algorithm. The authentication server will convert the password to the new
+format following a successfull authentication against the old one. You can tell the oAuth server how the old passwords were encrypted by adding code such as the following to config/auth.php
+
+	'old-password' => function($value) {
+        return md5(env('OLD_PASSWORD_SALT') . $value);
+    }
+ 
 ### Password Grant
 
     curl --request POST \

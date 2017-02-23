@@ -98,5 +98,9 @@ return [
             'expire' => 60,
         ],
     ],
+    
+    'old-password' => function($value) {
+        return md5(env('OLD_PASSWORD_SALT') . $value);
+    }
 
 ];
