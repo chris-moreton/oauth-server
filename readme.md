@@ -55,3 +55,32 @@ The full documentation for the server can be found at
       --form client_id=1 \
       --form 'client_secret={{client_credentials_client_secret}}' \
       --form 'scope=*'
+      
+### Password Check
+
+	curl --request POST \
+	  --url {{url}}/v1/users/{{username}}/passwordcheck \
+	  --header 'authorization: Bearer {{token}}' \
+	  --header 'content-type: application/json' \
+	  --data '{"password":"{{password}}"}'
+	  
+### Create User
+
+	curl --request POST \
+	  --url {{url}}/v1/users \
+	  --header 'content-type: application/json' \
+	  --data '{\n  "name": "{{name}}",\n  "email": "{{email}}",\n  "password": "{{password}}"\n}'
+	  
+### Get User Details
+
+	curl --request GET \
+	  --url {{url}}/v1/users/{{userid|email}}
+	  
+### Update User
+
+	curl --request PUT \
+	  --url {{url}}/v1/users/{{userid}} \
+	  --header 'authorization: Bearer {{token}}' \
+	  --header 'content-type: application/json' \
+	  --data '{"remember_token":"{{remember_token}}"}'
+	  
