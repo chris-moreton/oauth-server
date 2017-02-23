@@ -20,7 +20,7 @@ Generate the personal access and passport clients in the database
 
 	php artisan passport:install
 	
-Generate test users
+Generate test users (optional)
 
 	php artisan db:seed
 	
@@ -30,7 +30,7 @@ The oAuth2 server is now configured. You can generate a bearer token with full a
 	
 The full documentation for the server can be found at 
 
-    https://documenter.getpostman.com/view/133903/netsensia-oauth2-server/6YsWxPw
+https://documenter.getpostman.com/view/133903/netsensia-oauth2-server/6YsWxPw
     
 ## Quick docs
 
