@@ -39,12 +39,13 @@ https://documenter.getpostman.com/view/133903/netsensia-oauth2-server/6YsWxPw
 
 ### Importing Old Users
 
-You may add users directly to the users table including using their passwords encrypted using a legacy encryption algorithm. The authentication server will convert the password to the new
-format following a successfull authentication against the old one. You can tell the oAuth server how the old passwords were encrypted by adding code such as the following to config/auth.php
+You may want to import users to the users table. It doesn't matter what encryption algorithm was used to store the passwords so long as you tell oAuth server how the old passwords were encrypted by adding code such as the following to config/auth.php.
 
-	'old-password' => function($value) {
+    'old-password' => function($value) {
         return md5(env('OLD_PASSWORD_SALT') . $value);
     }
+    
+The authentication server will then convert the password to the new format following a successful authentication against the old one.
  
 ### Password Grant
 
