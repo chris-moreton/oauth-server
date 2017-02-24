@@ -71,29 +71,38 @@ The authentication server will then convert the password to the new format follo
       
 ### Password Check
 
-	curl --request POST \
-	  --url {{url}}/v1/users/{{username}}/passwordcheck \
-	  --header 'authorization: Bearer {{token}}' \
-	  --header 'content-type: application/json' \
-	  --data '{"password":"{{password}}"}'
+    curl --request POST \
+      --url {{url}}/v1/users/{{email}}/passwordcheck \
+      --header 'accept: application/json' \
+      --header 'authorization: Bearer {{web_client_token}}' \
+      --header 'content-type: application/json' \
+      --data '{"password":"{{password}}"}'
 	  
 ### Create User
 
-	curl --request POST \
-	  --url {{url}}/v1/users \
-	  --header 'content-type: application/json' \
-	  --data '{\n  "name": "{{name}}",\n  "email": "{{email}}",\n  "password": "{{password}}"\n}'
+    curl --request POST \
+      --url {{url}}/v1/users \
+      --header 'accept: application/json' \
+      --header 'authorization: Bearer {{admin_scope_token}}' \
+      --header 'content-type: application/json' \
+      --data '{
+      "name": "borat",
+      "email": "borat@netsensia.com",
+      "password": "asdasd"
+    }'
 	  
 ### Get User Details
 
-	curl --request GET \
-	  --url {{url}}/v1/users/{{userid|email}}
+    curl --request GET \
+      --url {{url}}/v1/users/{{userid|email}} \
+      --header 'accept: application/json' \
+      --header 'authorization: Bearer {{admin_scope_token}}'
 	  
 ### Update User
 
-	curl --request PUT \
-	  --url {{url}}/v1/users/{{userid}} \
-	  --header 'authorization: Bearer {{token}}' \
-	  --header 'content-type: application/json' \
-	  --data '{"remember_token":"{{remember_token}}"}'
+    curl --request PUT \
+      --url {{url}}/v1/users/{{userid}} \
+      --header 'authorization: Bearer {{web_client_token}}' \
+      --header 'content-type: application/json' \
+      --data '{"remember_token":"1234"}'
 	  
