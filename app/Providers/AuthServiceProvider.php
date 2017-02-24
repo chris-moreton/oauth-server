@@ -30,6 +30,7 @@ class AuthServiceProvider extends ServiceProvider
         
         Passport::tokensCan([
             'admin' => 'Full read/write access',
+            'user' => 'Basic user access',
         ]);
     }
 }

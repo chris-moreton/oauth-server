@@ -17,10 +17,14 @@ class TokenController extends Controller
     {
         $user = Auth::guard('api')->user();
         
-        return [
-            'name' => $user->name,
-            'email' => $user->email,
-            'token' => $user->token(),
-        ];
+        if ($user) {
+            return [
+                'name' => $user->name,
+                'email' => $user->email,
+                'token' => $user->token(),
+            ];
+        } else {
+            return null;
+        }
     }
 }
