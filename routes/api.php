@@ -15,5 +15,8 @@ Route::group(['middleware' => ['auth:api', 'scope:admin']], function () {
     Route::get('/users/{email}', 'UserController@show');
     Route::post('users', 'UserController@store');
     Route::put('/users/{id}', 'UserController@update');
-    Route::post('users/{id}/passwordcheck', 'UserController@passwordcheck');
+    Route::post('/users/{id}/passwordcheck', 'UserController@passwordcheck');
 });
+
+Route::get('/token-details', 'TokenController@tokenDetails');
+    

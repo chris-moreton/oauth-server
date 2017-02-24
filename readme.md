@@ -46,7 +46,35 @@ You may want to import users to the users table. It doesn't matter what encrypti
     }
     
 The authentication server will then convert the password to the new format following a successful authentication against the old one.
- 
+
+### Create User
+
+    curl --request POST \
+      --url {{url}}/v1/users \
+      --header 'accept: application/json' \
+      --header 'authorization: Bearer {{admin_scope_token}}' \
+      --header 'content-type: application/json' \
+      --data '{
+      "name": "borat",
+      "email": "borat@netsensia.com",
+      "password": "asdasd"
+    }'
+      
+### Get User Details
+
+    curl --request GET \
+      --url {{url}}/v1/users/{{userid|email}} \
+      --header 'accept: application/json' \
+      --header 'authorization: Bearer {{admin_scope_token}}'
+      
+### Update User
+
+    curl --request PUT \
+      --url {{url}}/v1/users/{{userid}} \
+      --header 'authorization: Bearer {{web_client_token}}' \
+      --header 'content-type: application/json' \
+      --data '{"remember_token":"1234"}'
+      
 ### Password Grant
 
     curl --request POST \
@@ -78,31 +106,11 @@ The authentication server will then convert the password to the new format follo
       --header 'content-type: application/json' \
       --data '{"password":"{{password}}"}'
 	  
-### Create User
-
-    curl --request POST \
-      --url {{url}}/v1/users \
-      --header 'accept: application/json' \
-      --header 'authorization: Bearer {{admin_scope_token}}' \
-      --header 'content-type: application/json' \
-      --data '{
-      "name": "borat",
-      "email": "borat@netsensia.com",
-      "password": "asdasd"
-    }'
-	  
-### Get User Details
+### Token Details
 
     curl --request GET \
-      --url {{url}}/v1/users/{{userid|email}} \
+      --url {{url}}/v1/token-details \
       --header 'accept: application/json' \
-      --header 'authorization: Bearer {{admin_scope_token}}'
-	  
-### Update User
-
-    curl --request PUT \
-      --url {{url}}/v1/users/{{userid}} \
       --header 'authorization: Bearer {{web_client_token}}' \
-      --header 'content-type: application/json' \
-      --data '{"remember_token":"1234"}'
+      --header 'content-type: application/json'
 	  
