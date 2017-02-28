@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,16 +11,22 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['middleware' => ['auth:api', 'scope:create-users']], function () {
+    Route::post('users', 'UserController@store');
 });
 
-Route::resource('users', 'UserController');//->middleware('scope:access-admin-information');
-
-Route::post('users', 'UserController@store');//->middleware('scope:access-admin-information');
-
-Route::post('users/{id}/passwordcheck', 'UserController@passwordcheck');//->middleware('scope:access-admin-information');
-
-Route::group(['middleware' => []], function () {
-    Route::get('users', 'UserController@index');
+Route::group(['middleware' => ['auth:api', 'scope:update-users']], function () {
+    Route::put('/users/{id}', 'UserController@update');
+    Route::post('/users/{id}/passwordcheck', 'UserController@passwordcheck');
 });
+
+Route::group(['middleware' => ['auth:api', 'scope:verify-password']], function () {
+    Route::post('/users/{id}/passwordcheck', 'UserController@passwordcheck');
+});
+    
+Route::group(['middleware' => ['client_credentials']], function () {
+    Route::get('/users/{email}', 'UserController@show');
+});
+
+Route::get('/token-details', 'TokenController@tokenDetails');
+    
