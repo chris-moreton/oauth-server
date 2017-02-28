@@ -22,7 +22,9 @@ Generate the personal access and passport clients in the database
 
 	php artisan passport:install
 	
-Generate test users (optional)
+Generate test user (optional)
+
+This will create a test user called chris@example.com with a password of "secret".
 
 	php artisan db:seed
 	

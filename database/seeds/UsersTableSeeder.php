@@ -11,14 +11,9 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\User::class, config('seeding.users'))->create()->each(function ($u) {
-            // create a relationship for this new user
-            // $u->posts()->save(factory(App\Post::class)->make());
-        });
-
         App\User::create([
-            'name' => 'Woooba',
-            'email' => 'chris@woooba.com',
+            'name' => 'Chris',
+            'email' => 'chris@example.com',
             'password' => bcrypt('secret'),
         ]);
     }
