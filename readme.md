@@ -1,5 +1,7 @@
 # Netsensia Authentication Server
 
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/641ab76478a4aa5a00f4)
+
 An authentication server with oAuth2 support.
  
 ## Installation
