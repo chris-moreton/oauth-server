@@ -1,9 +1,11 @@
 # Netsensia Authentication Server
 
+An authentication and user management server with oAuth2 support.
+
+You can see the full list of endpoints using Postman by following the link below.
+
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/641ab76478a4aa5a00f4)
 
-An authentication server with oAuth2 support.
- 
 ## Installation
 
 	cp .env.example .env
@@ -36,10 +38,6 @@ The oAuth2 server is now configured. You can generate a bearer token with full a
 to perform a password grant or client credentials grant (both of which return bearer tokens themselves).
 
 	php artisan generate-api-token
-	
-The full documentation for the server can be found at 
-
-https://documenter.getpostman.com/view/133903/netsensia-oauth2-server/6YsWxPw
 
 ### Quick Test
 
