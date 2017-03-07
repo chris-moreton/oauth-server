@@ -7,7 +7,7 @@
     "require": {
         "php": ">=5.6.4",
         "laravel/framework": "5.4.*",
-        "laravel/passport": "^2.0",
+        "chris-moreton/passport": "^2.0",
         "laravel/tinker": "~1.0"
     },
     "require-dev": {
@@ -47,5 +47,11 @@
     "config": {
         "preferred-install": "dist",
         "sort-packages": true
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url":  "git@github.com:chris-moreton/passport.git"
+        }
+    ]
 }
