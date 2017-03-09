@@ -1,6 +1,6 @@
 {
     "name": "netsensia/oauth2-server",
-    "description": "The Laravel Framework.",
+    "description": "An oauth2 server built on Laravel Passport",
     "keywords": ["framework", "laravel", "oauth2"],
     "license": "MIT",
     "type": "project",
