@@ -4,7 +4,7 @@ An authentication and user management server with oAuth2 support.
 
 You can see the full list of endpoints using Postman by following the link below.
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/641ab76478a4aa5a00f4)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/4a81ed8ddf3476d5eb91)
 
 ## Installation
 
