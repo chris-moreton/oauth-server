@@ -14,25 +14,7 @@ Fill in the database details, then install the Composer dependencies.
 
 	composer install
 	
-Generate the application key
-
-    php artisan key:generate
-
-Create the database tables
-
-	php artisan migrate
-	
-Generate the personal access and passport clients in the database
-
-	php artisan passport:install
-	
-Take a note of the client ids and secrets.
-	
-Generate test user (optional)
-
-This will create a test user called chris@example.com with a password of "secret".
-
-	php artisan db:seed
+A test user will have been created with email chris@example.com and a password of "secret".
 	
 The oAuth2 server is now configured. You can generate a bearer token with full access using. The token can be used to bypass the need
 to perform a password grant or client credentials grant (both of which return bearer tokens themselves).
