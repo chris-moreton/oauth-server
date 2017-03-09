@@ -1,7 +1,7 @@
 {
-    "name": "netsensia/authentication-server",
+    "name": "netsensia/oauth2-server",
     "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "keywords": ["framework", "laravel", "oauth2"],
     "license": "MIT",
     "type": "project",
     "require": {
