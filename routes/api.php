@@ -11,11 +11,11 @@
 |
 */
 
-Route::group(['middleware' => ['auth:api', 'scope:create-users']], function () {
+Route::group(['middleware' => ['client_credentials:create-users']], function () {
     Route::post('users', 'UserController@store');
 });
 
-Route::group(['middleware' => ['auth:api', 'scope:update-users']], function () {
+Route::group(['middleware' => ['client_credentials:update-users']], function () {
     Route::put('/users/{id}', 'UserController@update');
 });
 

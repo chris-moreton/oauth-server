@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use Laravel\Passport\Token;
+use Illuminate\Http\Response;
 
 class TokenController extends Controller
 {
@@ -23,7 +24,7 @@ class TokenController extends Controller
                 'token' => $user->token(),
             ];
         } else {
-            return null;
+            return response()->json(['error' => 'Token is not associated with any user and no token details are available.'], Response::HTTP_NOT_FOUND);
         }
     }
 }

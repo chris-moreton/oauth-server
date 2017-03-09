@@ -62,7 +62,10 @@ class UserController extends Controller
                 return response()->json(['error' => 'invalid field: ' . $key], Response::HTTP_BAD_REQUEST);
             }
         }
-        
+
+        if (User::where('email', $user->email)) {
+            return response()->json(['error' => 'email already exists: ' . $key], Response::HTTP_CONFLICT);
+        }
         $user->save();
         
         return $user;
