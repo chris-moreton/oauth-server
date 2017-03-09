@@ -14,21 +14,12 @@ Fill in the database details, then install the Composer dependencies.
 
 	composer install
 	
-A test user will have been created with email chris@example.com and a password of "secret".
+You will see the client credentials and password grant ids and secrets output to the console. Also, a test user will have been created with email chris@example.com and a password of "secret".
 	
 The oAuth2 server is now configured. You can generate a bearer token with full access using. The token can be used to bypass the need
 to perform a password grant or client credentials grant (both of which return bearer tokens themselves).
 
 	php artisan generate-api-token
-
-### Quick Test
-
-	curl --request POST \
-	  --url http://oauth-server.laravel/oauth/token \
-	  --header 'cache-control: no-cache' \
-	  --header 'content-type: application/x-www-form-urlencoded' \
-	  --header 'postman-token: 44f5a9c3-d759-030e-afb5-65fd8bb24b91' \
-	  --data 'grant_type=password&username=chris@example.com&password=secret&client_id=2&client_secret=CLIENT_SECRET_FOR_CLIENT_2&scope=*'
   
 ### Importing Old Users
 
