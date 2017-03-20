@@ -48,11 +48,5 @@
     "config": {
         "preferred-install": "dist",
         "sort-packages": true
-    },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url":  "git@github.com:chris-moreton/passport.git"
-        }
-    ]
+    }
 }
