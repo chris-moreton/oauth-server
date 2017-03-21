@@ -17,6 +17,7 @@ You can see the full list of endpoints using Postman by following the link below
 Fill in the database details, then install the Composer dependencies.
 
 	composer install
+	php artisan key:generate
 	
 You will see the client credentials and password grant ids and secrets output to the console. Also, a test user will have been created with email chris@example.com and a password of "secret".
 	
