@@ -63,8 +63,8 @@ class UserController extends Controller
             }
         }
 
-        if (User::where('email', $user->email)) {
-            return response()->json(['error' => 'email already exists: ' . $key], Response::HTTP_CONFLICT);
+        if (User::where('email', $user->email)->first()) {
+            return response()->json(['error' => 'email already exists: ' . $user->email], Response::HTTP_CONFLICT);
         }
         $user->save();
         
