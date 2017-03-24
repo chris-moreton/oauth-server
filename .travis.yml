@@ -22,7 +22,6 @@ env:
   - DB_CONNECTION=mysql
   - DB_DATABASE=oauth_test
   - DB_USERNAME=travis
-  - DB_PASSWORD=
 services:
   - mysql
 before_install:
