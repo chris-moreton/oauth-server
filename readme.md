@@ -16,10 +16,11 @@ You can see the full list of endpoints using Postman by following the link below
 
 	cp .env.example .env
 	
-Fill in the database details, then install the Composer dependencies.
+Fill in the database details, then install the Composer dependencies and install the server.
 
 	composer install
 	php artisan key:generate
+        php artisan oauth2-server:install
 	
 You will see the client credentials and password grant ids and secrets output to the console. Also, a test user will have been created with email chris@example.com and a password of "secret".
 	

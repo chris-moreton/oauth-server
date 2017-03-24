@@ -24,3 +24,6 @@ services:
 - mysql
 before_install:
 - mysql -e 'CREATE DATABASE oauth_test;'
+after_success:
+- GET https://forge.laravel.com/servers/126249/sites/307760/deploy/http?token=eALnJvkmy16IgSgCHawAohOZigoXqtQNNMdcOde4
+
