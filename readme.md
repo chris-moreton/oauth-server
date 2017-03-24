@@ -2,6 +2,8 @@
 
 A ready-to-go PHP/MySQL implementation of an authentication and user management server with oAuth2 support.
 
+[![Build Status](https://travis-ci.org/chris-moreton/oauth2-server.svg?branch=master)](https://travis-ci.org/chris-moreton/oauth2-server)
+
 A [PHP Client](https://github.com/chris-moreton/oauth-server-php-client) is also maintained as part of this project, which includes the test suite used to test both the client and this API. 
 
 It is built with [Laravel Passport](https://github.com/laravel/passport), which is a Laravel implementation of [The PHP League oAuth2 Server](https://github.com/thephpleague/oauth2-server)
