@@ -10,8 +10,6 @@ matrix:
 install:
 - composer install
 - php artisan generate-api-token
-script:
-- bin/phpspec run
 env:
   global:
   - APP_ENV=local
