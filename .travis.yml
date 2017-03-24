@@ -9,6 +9,7 @@ matrix:
   - php: nightly
 install:
 - composer install
+- php artisan outh2-server:install
 - php artisan generate-api-token
 env:
   global:
