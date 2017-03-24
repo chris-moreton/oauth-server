@@ -27,7 +27,6 @@ services:
 before_install:
 - mysql -e 'CREATE DATABASE oauth_test;'
 - echo $DEPLOY_URL
-after_success:
 notifications:
   webhooks:
     urls:
