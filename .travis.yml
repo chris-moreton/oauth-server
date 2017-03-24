@@ -26,11 +26,10 @@ services:
 - mysql
 before_install:
 - mysql -e 'CREATE DATABASE oauth_test;'
-- echo $DEPLOY_URL
 notifications:
   webhooks:
     urls:
       secure: Jh80T5bwS6gwpoyRXX894bjJvI06l1Rf6r3PMQvD5uKHdzPXuo0cNk3iZzGrUVLJT4V/OTB3Jfnu2Fxqw8qnKREXs6C+swKv9U46ja7mVGfg/E9GLeD5Qj0QlfO8sg4oyATu8EoOS8yZBL8TDkjnj2ZP+P48NY3SCNw+JDS7eLGWPWGb4ZGr/bjcXGI1DlChZHDJd/Me1Oy9yW18jpUv1Kxibh+p4biIR33bTHJGUvW/8frNXPZgWRw39SMuS6eqTc4km7z2lRxVPlvBHKVTOLWlo/WjAm4QaxxMdzRoe2ANorK2uylOrSBPwgQM7WGLbm0iDJ6DRG4xLK5pk+MbLuGV4Np+ftmjOsf/h1gbNDHF8Dy7afpEqCuUBMVEb6SeLdkV06DRQWz6BT24LgQwteQnJa+YnriczlVTS1mjxU2RF0vH3+NviX1dg3uLBKAXrXyZrTdZYm8OluTQTsKAMfi9rZOqqxeyjwnaGzsjH91tUSxJRMQp3vibomeW548SbFHShYAym9SdK/mOxLZHdjCb2kumgXQn0Sjpanl21woxKKo/vhi4HkyYiSf2/Cs13b6/0ObY7PoG/JGClE9kLG2lr5JbmOzgaIhh9f7YnQzuJTl1Cmf4XUOE7+G0EP5BSY3lviFFR4/wWzX6Nv2vASGbxPpiygp7/hUYAcoG85Q=
-   on_success: always
-   on_failure: never
+    on_success: always
+    on_failure: never
 
