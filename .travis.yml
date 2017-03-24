@@ -16,18 +16,15 @@ script:
 env:
   global:
   - APP_ENV=local
-  - APP_KEY=base64:fX6cXEUEwPNw1UzWM8GurEyK8tOqvuY0Dl+gVZ9nL88=
   - APP_DEBUG=true
   - APP_LOG_LEVEL=debug
   - APP_URL=http://localhost
   - DB_CONNECTION=mysql
-  - DB_HOST=127.0.0.1
-  - DB_PORT=3306
   - DB_DATABASE=oauth-server
   - DB_USERNAME=travis
   - DB_PASSWORD=
 services:
   - mysql
 before_install:
-  - mysql -e 'CREATE DATABASE oauth-server;'
+  - mysql -e 'CREATE DATABASE oauth_test;'
 
