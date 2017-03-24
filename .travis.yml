@@ -9,7 +9,6 @@ matrix:
   - php: nightly
 install:
 - composer install
-- php artisan key:generate
 - php artisan generate-api-token
 script:
 - bin/phpspec run
@@ -22,8 +21,8 @@ env:
   - DB_CONNECTION=mysql
   - DB_DATABASE=oauth_test
   - DB_USERNAME=travis
+  - secure: RSD4SSonItahrsg6Z/j0cO9jp8dvF90QXgrHBbzw8ZU8h9/ADF0FcLaOJ56kG7LKgr5gL6n7JqAIoCdbHdURlJywT3bfN5mgSTe+OX26xlyfPw8naPjoLusmZCysMEzkS0TQSsXg5EzLekEmRByQKcmyNcKoawjnrfpy92NYEKMb2rA+7Y2+PdN3C2DHWzlBh8JJBBUOZVq47lLT6rBj0YTREHk7C3TTQDYGwiw9QdFDdHr1XBHBcKZSqvwJZAhY1+5DV+nTd5HlTWxnVIjJUsVQMu75z8p3uAPdPbevgTbq/eNK7d196InhTkzf4lc+Npv62XKlaY8dk0xud2e9jBOyQ5qrxXqBIu1s9NtYJ+je4/N9gyFLBbrJOYonrE9fE2u/YCVcNCETSUV1gvXEjvY3dHsuG9x4gryt3G3RFCR1J7eIemBYpZRiWTgE2+U9bnlN6lYPfa/zjjK3T5RkoYJLPDRuy6LF44WUqabrgnKI3XjYv/oLkk508PjFjlmENvvexdrRSx1HZFun4P80XPia5yNlXb1eIPeWTh5vuRi7LsFiWAn1egdUPmA4DZn7N9EaNHz+6Qeu4lqjejUo82FAf+1wiaCltmwCZMsifI6fFSSfVX2V2e4QmcBOJiuZhhZZfUWXOiwEPuwyd3P+cMDUHH08xiNtj6XeMv+IAP0=
 services:
-  - mysql
+- mysql
 before_install:
-  - mysql -e 'CREATE DATABASE oauth_test;'
-
+- mysql -e 'CREATE DATABASE oauth_test;'
