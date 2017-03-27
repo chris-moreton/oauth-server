@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['middleware' => ['client_credentials:create-users']], function () {
+Route::group(['middleware' => ['client_credentials:admin-create']], function () {
     Route::post('users', 'UserController@store');
 });
 

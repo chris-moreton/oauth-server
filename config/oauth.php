@@ -7,7 +7,7 @@ return [
         'user-update' => '',
         'verify-password' => '',
         'admin-read' => '',
-        'admin-write' => '',
+        'admin-create' => '',
         'admin-update' => '',
     ],
 ];
