@@ -67,9 +67,9 @@ class CreateUserTest extends TestCase
     
     protected function getCreateUserParams($uniqifier = '') {
         
-        $name = $uniqifier . '_' . debug_backtrace()[1]['function'] . '_' . time();
+        $name = $uniqifier . '_' . debug_backtrace()[2]['function'] . '_' . time();
         $email = $name . '@netsensia.com';
-        
+
         $this->lastParams = [
             'name' => $name,
             'email' => $email,
