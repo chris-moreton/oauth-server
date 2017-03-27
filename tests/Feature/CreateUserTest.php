@@ -43,6 +43,28 @@ class CreateUserTest extends TestCase
         $this->routeTest('POST', '/v1/users', $this->goodScopes, 'getCreateUserParams', 'getDefaultUserCredentialsToken', 'getUserCreatedJson', 201);
     }
     
+    public function testConflictWhenAttemptingToCreateUsersWithSameEmailAddress()
+    {
+        $params = $this->getCreateUserParams();
+        
+        $response = $this->json('POST', '/v1/users',
+            $params,
+            $this->getHeaders($this->getDefaultUserCredentialsToken('admin-create'))
+        );
+        
+        $response->assertJson($this->getUserCreatedJson());
+        $response->assertStatus(201);
+        
+        $response = $this->json('POST', '/v1/users',
+            $params,
+            $this->getHeaders($this->getDefaultUserCredentialsToken('admin-create'))
+        );
+
+        $response->assertJson(['error' => 'email already exists: ' . $params['email']]);
+        $response->assertStatus(409);
+        
+    }
+    
     protected function getCreateUserParams($uniqifier = '') {
         
         $name = $uniqifier . '_' . debug_backtrace()[1]['function'] . '_' . time();
