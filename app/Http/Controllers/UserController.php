@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use App\User;
 use Illuminate\Http\Response;
+use Auth;
 
 class UserController extends Controller
 {
@@ -85,7 +86,17 @@ class UserController extends Controller
             $key = 'id';
         }
         
-        return User::where($key, $id)->first();
+        $user = User::where($key, $id)->first();
+        
+        if (Auth::user()->id != $id && Auth::user()->email != $id) {
+            return response()->json(['error' => 'Unauthenticated.'], Response::HTTP_UNAUTHORIZED);
+        }
+        
+        if ($user) {
+            return $user;
+        }
+        
+        return response()->json(['error' => 'user not found.'], Response::HTTP_NOT_FOUND);
        
     }
 

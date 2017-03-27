@@ -1,16 +1,16 @@
 # Netsensia Authentication Server
 
-A ready-to-go PHP/MySQL implementation of an authentication and user management server with oAuth2 support.
-
 [![Build Status](https://travis-ci.org/chris-moreton/oauth2-server.svg?branch=master)](https://travis-ci.org/chris-moreton/oauth2-server)
 
-A [PHP Client](https://github.com/chris-moreton/oauth-server-php-client) is also maintained as part of this project, which includes the test suite used to test both the client and this API. 
+A ready-to-go PHP/MySQL implementation of an authentication and user management server with oAuth2 support.
 
 It is built with [Laravel Passport](https://github.com/laravel/passport), which is a Laravel implementation of [The PHP League oAuth2 Server](https://github.com/thephpleague/oauth2-server)
 
 You can see the full list of endpoints using Postman by following the link below.
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/4a81ed8ddf3476d5eb91)
+
+A [PHP Client](https://github.com/chris-moreton/oauth-server-php-client) is also maintained as part of this project, which includes the test suite used to test both the client and this API. 
 
 ## Installation
 
@@ -20,7 +20,7 @@ Fill in the database details, then install the Composer dependencies and install
 
 	composer install
 	php artisan key:generate
-        php artisan oauth2-server:install
+    php artisan oauth2-server:install
 	
 You will see the client credentials and password grant ids and secrets output to the console. Also, a test user will have been created with email chris@example.com and a password of "secret".
 	

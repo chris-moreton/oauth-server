@@ -11,19 +11,19 @@
 |
 */
 
-Route::group(['middleware' => ['client_credentials:admin-create']], function () {
+Route::group(['middleware' => ['client_credentials_all:admin-create']], function () {
     Route::post('users', 'UserController@store');
 });
 
-Route::group(['middleware' => ['client_credentials:update-users']], function () {
+Route::group(['middleware' => ['client_credentials_all:update-users']], function () {
     Route::put('/users/{id}', 'UserController@update');
 });
 
-Route::group(['middleware' => ['client_credentials:verify-password']], function () {
+Route::group(['middleware' => ['client_credentials_all:verify-password']], function () {
     Route::post('/users/{id}/passwordcheck', 'UserController@passwordcheck');
 });
 
-Route::group(['middleware' => ['client_credentials:get-user-details-from-email']], function () {
+Route::group(['middleware' => ['auth:api', 'user_scopes_any:user-read']], function () {
     Route::get('/users/{email}', 'UserController@show');
 });
     

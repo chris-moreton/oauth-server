@@ -11,7 +11,7 @@ namespace App\Extensions;
 use Laravel\Passport\Http\Middleware\CheckClientCredentials as PassportCheckClientCredentials;
 use Illuminate\Auth\AuthenticationException;
 
-class CheckClientCredentials extends PassportCheckClientCredentials
+class CheckClientCredentialsForAnyScope extends PassportCheckClientCredentials
 {
     /**
      * Validate the scopes on the incoming request.
@@ -31,10 +31,12 @@ class CheckClientCredentials extends PassportCheckClientCredentials
         }
     
         foreach ($scopes as $scope) {
-            if (! in_array($scope, $tokenScopes)) {
-                throw new AuthenticationException();
+            if (in_array($scope, $tokenScopes)) {
+                return;
             }
         }
+        
+        throw new AuthenticationException();
     }
 }
 

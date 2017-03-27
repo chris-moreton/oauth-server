@@ -50,14 +50,15 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'scope' => \Laravel\Passport\Http\Middleware\CheckForAnyScope::class,
-        'scopes' => \Laravel\Passport\Http\Middleware\CheckScopes::class,
+        'user_scopes_any' => \Laravel\Passport\Http\Middleware\CheckForAnyScope::class,
+        'user_scopes_all' => \Laravel\Passport\Http\Middleware\CheckScopes::class,
+        'client_credentials_any' => \App\Extensions\CheckClientCredentialsForAnyScope::class,
+        'client_credentials_all' => \App\Extensions\CheckClientCredentialsForAllScopes::class,
         'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'client_credentials' => \App\Extensions\CheckClientCredentials::class,
     ];
 }
