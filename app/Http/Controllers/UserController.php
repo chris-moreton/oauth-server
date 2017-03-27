@@ -68,7 +68,7 @@ class UserController extends Controller
         }
         $user->save();
         
-        return $user;
+        return response()->json($user)->setStatusCode(Response::HTTP_CREATED);
     }
 
     /**

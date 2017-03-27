@@ -25,14 +25,16 @@ abstract class TestCase extends BaseTestCase
         ];
     }
     
-    protected function routeTest($method, $endpoint, $scopes, $funcParams, $funcHeaders, $funcExpectedJson) {
+    protected function routeTest($method, $endpoint, $scopes, $funcParams, $funcHeaders, $funcExpectedJson, $expectedStatusCode) {
         
         foreach ($scopes as $scope) {
-            $this->json('POST', '/v1/users',
+            $response = $this->json('POST', '/v1/users',
                 $this->$funcParams(md5($scope)),
                 $this->getHeaders($this->$funcHeaders($scope))
-            )
-            ->assertJson($this->$funcExpectedJson());
+            );
+            
+            $response->assertStatus($expectedStatusCode);
+            $response->assertJson($this->$funcExpectedJson());
         }
     }
         

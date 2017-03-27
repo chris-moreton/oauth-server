@@ -14,29 +14,33 @@ class CreateUserTest extends TestCase
     
     public function testCreateUserUnauthenticated()
     {
-        $this->json('POST', '/v1/users', $this->getCreateUserParams(), $this->getHeaders('Bad Token'))->assertJson([
+        $response = $this->json('POST', '/v1/users', $this->getCreateUserParams(), $this->getHeaders('Bad Token'));
+        
+        $response->assertJson([
            'error' => 'Unauthenticated.'
         ]);
+        
+        $response->assertStatus(401);
     }
     
     public function testCreateUserWithClientCredentialsTokenWithBadScopes()
     {
-        $this->routeTest('POST', '/v1/users', $this->badScopes, 'getCreateUserParams', 'getClientCredentialsToken', 'getUnauthenticatedJson');
+        $this->routeTest('POST', '/v1/users', $this->badScopes, 'getCreateUserParams', 'getClientCredentialsToken', 'getUnauthenticatedJson', 401);
     }
 
     public function testCreateUserWithClientCredentialsTokenWithGoodScopes()
     {
-        $this->routeTest('POST', '/v1/users', $this->goodScopes, 'getCreateUserParams', 'getClientCredentialsToken', 'getUserCreatedJson');
+        $this->routeTest('POST', '/v1/users', $this->goodScopes, 'getCreateUserParams', 'getClientCredentialsToken', 'getUserCreatedJson', 201);
     }
 
     public function testCreateUserWithUserTokenWithBadScopes()
     {
-        $this->routeTest('POST', '/v1/users', $this->badScopes, 'getCreateUserParams', 'getDefaultUserCredentialsToken', 'getUnauthenticatedJson');
+        $this->routeTest('POST', '/v1/users', $this->badScopes, 'getCreateUserParams', 'getDefaultUserCredentialsToken', 'getUnauthenticatedJson', 401);
     }
 
     public function testCreateUserWithUserTokenWithGoodScopes()
     {
-        $this->routeTest('POST', '/v1/users', $this->goodScopes, 'getCreateUserParams', 'getDefaultUserCredentialsToken', 'getUserCreatedJson');
+        $this->routeTest('POST', '/v1/users', $this->goodScopes, 'getCreateUserParams', 'getDefaultUserCredentialsToken', 'getUserCreatedJson', 201);
     }
     
     protected function getCreateUserParams($uniqifier = '') {
