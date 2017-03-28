@@ -14,7 +14,7 @@ class CreateUserTest extends TestCase
     
     public function testCreateUserUnauthenticated()
     {
-        $response = $this->json('POST', '/v1/users', $this->getCreateUserParams(), $this->getHeaders('Bad Token'));
+        $response = $this->json('POST', '/v1/users', $this->getCreateUserParams(), $this->getAuthorizationHeaders('Bad Token'));
         
         $response->assertJson([
            'error' => 'Unauthenticated.'
@@ -25,7 +25,7 @@ class CreateUserTest extends TestCase
     
     public function testCreateUserWithClientCredentialsTokenWithBadScopes()
     {
-        $this->routeTest('POST', '/v1/users', $this->badScopes, 'getCreateUserParams', 'getClientCredentialsToken', 'getInvalidScopesJson', 403);
+        $this->routeTest('POST', '/v1/users', $this->badScopes, 'getCreateUserParams', 'getClientCredentialsToken', 'getWrongScopesJson', 403);
     }
 
     public function testCreateUserWithClientCredentialsTokenWithGoodScopes()
@@ -35,7 +35,7 @@ class CreateUserTest extends TestCase
 
     public function testCreateUserWithUserTokenWithBadScopes()
     {
-        $this->routeTest('POST', '/v1/users', $this->badScopes, 'getCreateUserParams', 'getDefaultUserCredentialsToken', 'getInvalidScopesJson', 403);
+        $this->routeTest('POST', '/v1/users', $this->badScopes, 'getCreateUserParams', 'getDefaultUserCredentialsToken', 'getWrongScopesJson', 403);
     }
 
     public function testCreateUserWithUserTokenWithGoodScopes()
@@ -49,7 +49,7 @@ class CreateUserTest extends TestCase
         
         $response = $this->json('POST', '/v1/users',
             $params,
-            $this->getHeaders($this->getDefaultUserCredentialsToken('admin-create'))
+            $this->getAuthorizationHeaders($this->getDefaultUserCredentialsToken('admin-create'))
         );
         
         $response->assertJson($this->getUserCreatedJson());
@@ -57,7 +57,7 @@ class CreateUserTest extends TestCase
         
         $response = $this->json('POST', '/v1/users',
             $params,
-            $this->getHeaders($this->getDefaultUserCredentialsToken('admin-create'))
+            $this->getAuthorizationHeaders($this->getDefaultUserCredentialsToken('admin-create'))
         );
 
         $response->assertJson(['error' => 'email already exists: ' . $params['email']]);

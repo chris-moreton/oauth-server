@@ -9,7 +9,7 @@ class GetUserDetailsTest extends TestCase
     
     public function testGetUserDetailsUnauthenticated()
     {
-        $response = $this->json('GET', '/v1/users/chris@example.com', [], $this->getHeaders('Bad Token'));
+        $response = $this->json('GET', '/v1/users/chris@example.com', [], $this->getAuthorizationHeaders('Bad Token'));
         
         $response->assertJson($this->getUnauthenticatedJson());
         
@@ -18,7 +18,7 @@ class GetUserDetailsTest extends TestCase
     
     public function testGetNonExistentUserDetails()
     {
-        $response = $this->json('GET', '/v1/users/chris2@example.com', [], $this->getHeaders($this->getUserCredentialsToken('chris@example.com', 'secret', 'user-read')));
+        $response = $this->json('GET', '/v1/users/chris2@example.com', [], $this->getAuthorizationHeaders($this->getUserCredentialsToken('chris@example.com', 'secret', 'user-read')));
     
         $response->assertJson($this->getWrongUserJson());
     
@@ -27,7 +27,7 @@ class GetUserDetailsTest extends TestCase
     
     public function testGetUserDetailsWithTokenForWrongUser()
     {
-        $response = $this->json('GET', '/v1/users/chris@example.com', [], $this->getHeaders($this->getUserCredentialsToken('mary@example.com', 'secret', 'user-read')));
+        $response = $this->json('GET', '/v1/users/chris@example.com', [], $this->getAuthorizationHeaders($this->getUserCredentialsToken('mary@example.com', 'secret', 'user-read')));
     
         $response->assertJson($this->getWrongUserJson());
     
@@ -36,14 +36,14 @@ class GetUserDetailsTest extends TestCase
     
     public function testGetUserDetailsWithWrongTokenScopes()
     {
-        $response = $this->json('GET', '/v1/users/chris@example.com', [], $this->getHeaders($this->getUserCredentialsToken('chris@example.com', 'secret', 'user-update')));
+        $response = $this->json('GET', '/v1/users/chris@example.com', [], $this->getAuthorizationHeaders($this->getUserCredentialsToken('chris@example.com', 'secret', 'user-update')));
     
         $response->assertStatus(403);
     }
     
     public function testGetUserDetailsWithCorrectTokenScopes()
     {
-        $response = $this->json('GET', '/v1/users/chris@example.com', [], $this->getHeaders($this->getUserCredentialsToken('chris@example.com', 'secret', 'user-read')));
+        $response = $this->json('GET', '/v1/users/chris@example.com', [], $this->getAuthorizationHeaders($this->getUserCredentialsToken('chris@example.com', 'secret', 'user-read')));
     
         $response->assertJson([
             'email' => 'chris@example.com'

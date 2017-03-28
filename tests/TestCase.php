@@ -10,8 +10,15 @@ abstract class TestCase extends BaseTestCase
     use CreatesApplication;
     
     protected $lastParams;
+
+    protected function getPostHeaders() {
+        return [
+            'Content-Type' => 'application/x-www-form-urlencoded',
+            'Accept' => 'application/json',
+        ];
+    }
     
-    protected function getHeaders($token) {
+    protected function getAuthorizationHeaders($token) {
         return [
             'Authorization' => 'Bearer ' . $token,
             'Content-Type' => 'application/json',
@@ -25,9 +32,15 @@ abstract class TestCase extends BaseTestCase
         ];
     }
 
-    protected function getInvalidScopesJson() {
+    protected function getWrongScopesJson() {
         return [
             'error' => 'Invalid scope(s) provided.'
+        ];
+    }
+    
+    protected function getInvalidScopesJson() {
+        return [
+            'error' => 'invalid_scope',  
         ];
     }
     
@@ -43,22 +56,42 @@ abstract class TestCase extends BaseTestCase
         ];
     }
     
+    protected function getInvalidCredentialsJson() {
+        return [
+            'error' => 'invalid_credentials',
+        ];
+    }
+    
+    protected function getBearerTokenJson() {
+        return [
+            'token_type' => 'Bearer',  
+        ];
+    }
+    
     protected function routeTest($method, $endpoint, $scopes, $funcParams, $funcHeaders, $funcExpectedJson, $expectedStatusCode) {
         
         foreach ($scopes as $scope) {
             $response = $this->json('POST', '/v1/users',
                 $this->$funcParams(md5($scope)),
-                $this->getHeaders($this->$funcHeaders($scope))
+                $this->getAuthorizationHeaders($this->$funcHeaders($scope))
             );
             
             $response->assertStatus($expectedStatusCode);
             $response->assertJson($this->$funcExpectedJson());
         }
     }
-        
-    protected function getClientCredentialsToken($scopes) {
-        $personalAccessClient = Client::where('personal_access_client', 1)->first();
+       
+    protected function getPersonalAccessDetails() {
+        return Client::where('personal_access_client', 1)->first();
+    }
     
+    protected function getClientCredentialsDetails() {
+        return Client::where('personal_access_client', 0)->first();
+    }
+    
+    protected function getClientCredentialsToken($scopes) {
+        $personalAccessClient = $this->getPersonalAccessDetails();
+        
         $result = $this->json('POST', '/oauth/token', [
             'grant_type' => 'client_credentials',
             'client_id' => $personalAccessClient->id,
@@ -72,7 +105,7 @@ abstract class TestCase extends BaseTestCase
     }
     
     protected function getUserCredentialsToken($username, $password, $scopes) {
-        $passwordGrantClient = Client::where('personal_access_client', 0)->first();
+        $passwordGrantClient = $this->getClientCredentialsDetails();
     
         $result = $this->json('POST', '/oauth/token', [
             'grant_type' => 'password',
