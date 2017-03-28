@@ -31,6 +31,12 @@ abstract class TestCase extends BaseTestCase
         ];
     }
     
+    protected function getWrongUserJson() {
+        return [
+            'error' => 'Token does not belong to requested user.'
+        ];
+    }
+    
     protected function routeTest($method, $endpoint, $scopes, $funcParams, $funcHeaders, $funcExpectedJson, $expectedStatusCode) {
         
         foreach ($scopes as $scope) {

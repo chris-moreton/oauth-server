@@ -1,6 +1,5 @@
 <?php
-
-namespace App\Extensions;
+namespace App\Http\Middleware;
 
 use Laravel\Passport\Exceptions\MissingScopeException;
 use Illuminate\Http\Response;

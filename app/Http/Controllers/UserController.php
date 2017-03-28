@@ -89,7 +89,7 @@ class UserController extends Controller
         $user = User::where($key, $id)->first();
         
         if (Auth::user()->id != $id && Auth::user()->email != $id) {
-            return response()->json(['error' => 'Unauthenticated.'], Response::HTTP_UNAUTHORIZED);
+            return response()->json(['error' => 'Token does not belong to requested user.'], Response::HTTP_UNAUTHORIZED);
         }
         
         if ($user) {

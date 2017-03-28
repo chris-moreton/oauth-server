@@ -50,10 +50,10 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'user_scopes_any' => \App\Extensions\CheckForAnyScope::class,
-        'user_scopes_all' => \App\Extensions\CheckScopes::class,
-        'client_credentials_any' => \App\Extensions\CheckClientCredentialsForAnyScope::class,
-        'client_credentials_all' => \App\Extensions\CheckClientCredentialsForAllScopes::class,
+        'user_scopes_any' => \App\Http\Middleware\CheckForAnyScope::class,
+        'user_scopes_all' => \App\Http\Middleware\CheckScopes::class,
+        'client_credentials_any' => \App\Http\Middleware\CheckClientCredentialsForAnyScope::class,
+        'client_credentials_all' => \App\Http\Middleware\CheckClientCredentialsForAllScopes::class,
         'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,

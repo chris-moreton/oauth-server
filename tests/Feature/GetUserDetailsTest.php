@@ -16,9 +16,7 @@ class GetUserDetailsTest extends TestCase
     {
         $response = $this->json('GET', '/v1/users/chris@example.com', [], $this->getHeaders('Bad Token'));
         
-        $response->assertJson([
-            'error' => 'Unauthenticated.'
-        ]);
+        $response->assertJson($this->getUnauthenticatedJson());
         
         $response->assertStatus(401);
     }
@@ -27,9 +25,7 @@ class GetUserDetailsTest extends TestCase
     {
         $response = $this->json('GET', '/v1/users/chris2@example.com', [], $this->getHeaders($this->getUserCredentialsToken('chris@example.com', 'secret', 'user-read')));
     
-        $response->assertJson([
-            'error' => 'Unauthenticated.'
-        ]);
+        $response->assertJson($this->getWrongUserJson());
     
         $response->assertStatus(401);
     }
@@ -38,9 +34,7 @@ class GetUserDetailsTest extends TestCase
     {
         $response = $this->json('GET', '/v1/users/chris@example.com', [], $this->getHeaders($this->getUserCredentialsToken('mary@example.com', 'secret', 'user-read')));
     
-        $response->assertJson([
-            'error' => 'Unauthenticated.'
-        ]);
+        $response->assertJson($this->getWrongUserJson());
     
         $response->assertStatus(401);
     }

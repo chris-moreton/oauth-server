@@ -1,5 +1,5 @@
 <?php
-namespace App\Extensions;
+namespace App\Http\Middleware;
 
 /**
  * Override the default Passport class so that we can allow superuser scope for client_credentials grant
