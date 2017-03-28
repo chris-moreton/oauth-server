@@ -47,33 +47,21 @@ class CreateUserTest extends TestCase
     {
         $name = 'testCreateUserPassword_' . time();
         $email = $name . '@netsensia.com';
+        $password = 'pass_' . $name;
         
         $params = [
             'name' => $name,
             'email' => $email,
-            'password' => 'pass' . $name,
+            'password' => $password,
         ];
         
         $response = $this->json('POST', '/v1/users', $params, $this->getAuthorizationHeaders($this->getClientCredentialsToken('admin-create')));
         
         $response->assertJson(['name' => $name, 'email' => $email]);
-        $response->assertStatus(200);
+        $response->assertStatus(201);
         
-        $passwordGrantClient = $this->getClientCredentialsDetails();
-        
-        $response = $this->post('/oauth/token', [
-                'grant_type' => 'password',
-                'username' => $params['email'],
-                'password' => $params['password'],
-                'client_id' => $passwordGrantClient->id,
-                'client_secret' => $passwordGrantClient->secret,
-                'scope' => '*',
-            ],
-            $this->getPostHeaders()
-        );
-        
-        $response->assertStatus(200);
-        $response->assertJson($this->getBearerTokenJson());
+        $response = $this->json('POST', '/v1/users/' . $email . '/passwordcheck', ['password' => $password], $this->getAuthorizationHeaders($this->getClientCredentialsToken('*')));
+        $response->assertJson(['verified' => true]);
     }
     
     public function testConflictWhenAttemptingToCreateUsersWithSameEmailAddress()
