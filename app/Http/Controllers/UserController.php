@@ -116,22 +116,34 @@ class UserController extends Controller
         $user = User::where('id', $id)->first();
 
         if ($user) {
+            
+            if (Auth::user()->id != $id && Auth::user()->email != $id) {
+                return response()->json(['error' => 'Token does not belong to requested user.'], Response::HTTP_FORBIDDEN);
+            }
+            
             $count = 0;
             foreach ($request->json() as $key => $value) {
                 if (in_array($key, $user->getFillable())) {
+                    if ($key == 'email') {
+                        if (Auth::user()->email != $value) {
+                            if (User::where('email', $value)->first()) {
+                                return response()->json(['error' => 'Email already exists.'], Response::HTTP_BAD_REQUEST);
+                            }
+                        }
+                    }
                     if ($key == 'password') {
-                        $value = \Hash::make($password);
+                        $value = \Hash::make($value);
                     }
                     $user->$key = $value;
                 } else {
-                    return response()->json(['error' => 'invalid field: ' . $key], Response::HTTP_BAD_REQUEST);
+                    return response()->json(['error' => 'Invalid field: ' . $key], Response::HTTP_BAD_REQUEST);
                 }
             }
             $user->save();
             return $user;
         }
         
-        return response()->json(['error' => 'user not found'], Response::HTTP_NOT_FOUND);
+        return response()->json(['error' => 'User not found.'], Response::HTTP_NOT_FOUND);
     }
 
     /**

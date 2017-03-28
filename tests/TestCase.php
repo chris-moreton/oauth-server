@@ -68,6 +68,12 @@ abstract class TestCase extends BaseTestCase
         ];
     }
     
+    protected function getUserNotFoundJson() {
+        return [
+            'error' => 'User not found.',
+        ];
+    }
+    
     protected function routeTest($method, $endpoint, $scopes, $funcParams, $funcHeaders, $funcExpectedJson, $expectedStatusCode) {
         
         foreach ($scopes as $scope) {

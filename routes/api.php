@@ -15,7 +15,7 @@ Route::group(['middleware' => ['client_credentials_all:admin-create']], function
     Route::post('users', 'UserController@store');
 });
 
-Route::group(['middleware' => ['client_credentials_all:update-users']], function () {
+Route::group(['middleware' => ['auth:api', 'user_scopes_all:user-update']], function () {
     Route::put('/users/{id}', 'UserController@update');
 });
 

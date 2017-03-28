@@ -43,6 +43,39 @@ class CreateUserTest extends TestCase
         $this->routeTest('POST', '/v1/users', $this->goodScopes, 'getCreateUserParams', 'getDefaultUserCredentialsToken', 'getUserCreatedJson', 201);
     }
     
+    public function testCreateUserPasswordCanLogin()
+    {
+        $name = 'testCreateUserPassword_' . time();
+        $email = $name . '@netsensia.com';
+        
+        $params = [
+            'name' => $name,
+            'email' => $email,
+            'password' => 'pass' . $name,
+        ];
+        
+        $response = $this->json('POST', '/v1/users', $params, $this->getAuthorizationHeaders($this->getClientCredentialsToken('admin-create')));
+        
+        $response->assertJson(['name' => $name, 'email' => $email]);
+        $response->assertStatus(200);
+        
+        $passwordGrantClient = $this->getClientCredentialsDetails();
+        
+        $response = $this->post('/oauth/token', [
+                'grant_type' => 'password',
+                'username' => $params['email'],
+                'password' => $params['password'],
+                'client_id' => $passwordGrantClient->id,
+                'client_secret' => $passwordGrantClient->secret,
+                'scope' => '*',
+            ],
+            $this->getPostHeaders()
+        );
+        
+        $response->assertStatus(200);
+        $response->assertJson($this->getBearerTokenJson());
+    }
+    
     public function testConflictWhenAttemptingToCreateUsersWithSameEmailAddress()
     {
         $params = $this->getCreateUserParams();
