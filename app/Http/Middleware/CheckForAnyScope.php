@@ -21,7 +21,7 @@ class CheckForAnyScope extends PassportCheckForAnyScope
         try {
             return parent::handle($request, $next, ...$scopes);
         } catch (MissingScopeException $e) {
-            throw new AuthorizationException('invalid scope(s) provided.');
+            throw new AuthorizationException('Invalid scope(s) provided.');
         }
     }
 }

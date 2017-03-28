@@ -37,6 +37,12 @@ abstract class TestCase extends BaseTestCase
         ];
     }
     
+    protected function getNoUserJson() {
+        return [
+            'error' => 'Token is not associated with any user and no token details are available.',
+        ];
+    }
+    
     protected function routeTest($method, $endpoint, $scopes, $funcParams, $funcHeaders, $funcExpectedJson, $expectedStatusCode) {
         
         foreach ($scopes as $scope) {

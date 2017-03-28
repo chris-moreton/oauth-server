@@ -27,5 +27,8 @@ Route::group(['middleware' => ['auth:api', 'user_scopes_any:user-read']], functi
     Route::get('/users/{email}', 'UserController@show');
 });
     
-Route::get('/token-details', 'TokenController@tokenDetails');
+Route::group(['middleware' => ['auth:api', 'user_scopes_any:user-read']], function () {
+    Route::get('/token-details', 'TokenController@tokenDetails');
+});
+    
     
