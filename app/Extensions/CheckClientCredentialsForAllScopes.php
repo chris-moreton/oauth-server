@@ -10,6 +10,7 @@ namespace App\Extensions;
  */
 use Laravel\Passport\Http\Middleware\CheckClientCredentials as PassportCheckClientCredentials;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class CheckClientCredentialsForAllScopes extends PassportCheckClientCredentials
 {
@@ -23,16 +24,16 @@ class CheckClientCredentialsForAllScopes extends PassportCheckClientCredentials
      * @throws \Illuminate\Auth\AuthenticationException
      */
     protected function validateScopes($psr, $scopes)
-    {
+    {      
         $tokenScopes = $psr->getAttribute('oauth_scopes');
-        
+     
         if (in_array('*', $tokenScopes) || empty($tokenScopes)) {
             return;
         }
-    
+        
         foreach ($scopes as $scope) {
             if (! in_array($scope, $tokenScopes)) {
-                throw new AuthenticationException();
+                throw new AuthorizationException('Invalid scope(s) provided.');
             }
         }
     }

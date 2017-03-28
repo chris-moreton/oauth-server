@@ -50,8 +50,8 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'user_scopes_any' => \Laravel\Passport\Http\Middleware\CheckForAnyScope::class,
-        'user_scopes_all' => \Laravel\Passport\Http\Middleware\CheckScopes::class,
+        'user_scopes_any' => \App\Extensions\CheckForAnyScope::class,
+        'user_scopes_all' => \App\Extensions\CheckScopes::class,
         'client_credentials_any' => \App\Extensions\CheckClientCredentialsForAnyScope::class,
         'client_credentials_all' => \App\Extensions\CheckClientCredentialsForAllScopes::class,
         'auth' => \Illuminate\Auth\Middleware\Authenticate::class,

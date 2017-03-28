@@ -24,6 +24,12 @@ abstract class TestCase extends BaseTestCase
             'error' => 'Unauthenticated.'
         ];
     }
+
+    protected function getInvalidScopesJson() {
+        return [
+            'error' => 'Invalid scope(s) provided.'
+        ];
+    }
     
     protected function routeTest($method, $endpoint, $scopes, $funcParams, $funcHeaders, $funcExpectedJson, $expectedStatusCode) {
         

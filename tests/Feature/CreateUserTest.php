@@ -25,7 +25,7 @@ class CreateUserTest extends TestCase
     
     public function testCreateUserWithClientCredentialsTokenWithBadScopes()
     {
-        $this->routeTest('POST', '/v1/users', $this->badScopes, 'getCreateUserParams', 'getClientCredentialsToken', 'getUnauthenticatedJson', 401);
+        $this->routeTest('POST', '/v1/users', $this->badScopes, 'getCreateUserParams', 'getClientCredentialsToken', 'getInvalidScopesJson', 403);
     }
 
     public function testCreateUserWithClientCredentialsTokenWithGoodScopes()
@@ -35,7 +35,7 @@ class CreateUserTest extends TestCase
 
     public function testCreateUserWithUserTokenWithBadScopes()
     {
-        $this->routeTest('POST', '/v1/users', $this->badScopes, 'getCreateUserParams', 'getDefaultUserCredentialsToken', 'getUnauthenticatedJson', 401);
+        $this->routeTest('POST', '/v1/users', $this->badScopes, 'getCreateUserParams', 'getDefaultUserCredentialsToken', 'getInvalidScopesJson', 403);
     }
 
     public function testCreateUserWithUserTokenWithGoodScopes()

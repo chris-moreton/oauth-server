@@ -5,6 +5,11 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -36,15 +41,42 @@ class Handler extends ExceptionHandler
     }
 
     /**
-     * Render an exception into an HTTP response.
+     * Render an exception into a response.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
-     * @return \Illuminate\Http\Response
+     * @param  \Exception  $e
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function render($request, Exception $exception)
+    public function render($request, Exception $e)
     {
-        return parent::render($request, $exception);
+        $e = $this->prepareException($e);
+
+        if ($e instanceof HttpResponseException) {
+            return $e->getResponse();
+        } elseif ($e instanceof AuthenticationException) {
+            return $this->unauthenticated($request, $e);
+        } elseif ($e instanceof ValidationException) {
+            return $this->convertValidationExceptionToResponse($e, $request);
+        } elseif ($e instanceof AuthorizationException) {
+            return $this->unauthorized($request, $e);
+        }
+
+        return $this->prepareResponse($request, $e);
+    }
+    
+    /**
+     * Prepare exception for rendering.
+     *
+     * @param  \Exception  $e
+     * @return \Exception
+     */
+    protected function prepareException(Exception $e)
+    {
+        if ($e instanceof ModelNotFoundException) {
+            $e = new NotFoundHttpException($e->getMessage(), $e);
+        }
+    
+        return $e;
     }
 
     /**
@@ -60,6 +92,22 @@ class Handler extends ExceptionHandler
             return response()->json(['error' => 'Unauthenticated.'], 401);
         }
 
+        return redirect()->guest(route('login'));
+    }
+    
+    /**
+     * Convert an unauthorized exception into an unauthorized response.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Auth\AuthorizationException  $exception
+     * @return \Illuminate\Http\Response
+     */
+    protected function unauthorized($request, AuthorizationException $exception)
+    {
+        if ($request->expectsJson()) {
+            return response()->json(['error' => $exception->getMessage()], 403);
+        }
+    
         return redirect()->guest(route('login'));
     }
 }

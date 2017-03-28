@@ -10,6 +10,7 @@ namespace App\Extensions;
  */
 use Laravel\Passport\Http\Middleware\CheckClientCredentials as PassportCheckClientCredentials;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class CheckClientCredentialsForAnyScope extends PassportCheckClientCredentials
 {
@@ -36,7 +37,7 @@ class CheckClientCredentialsForAnyScope extends PassportCheckClientCredentials
             }
         }
         
-        throw new AuthenticationException();
+        throw new AuthorizationException('Invalid scope(s) provided.');
     }
 }
 
