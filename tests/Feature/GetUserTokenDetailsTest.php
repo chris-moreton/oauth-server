@@ -4,11 +4,11 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 
-class GetTokenDetailsTest extends TestCase
+class GetUserTokenDetailsTest extends TestCase
 {
-    private $endpoint = '/v1/token-details';
+    private $endpoint = '/v1/user-token-details';
     
-    public function testGetTokenDetailsUnauthenticated()
+   public function testGetUserTokenDetailsUnauthenticated()
     {
         $response = $this->json('GET', $this->endpoint, [], $this->getAuthorizationHeaders('Bad Token'));
         
@@ -16,7 +16,7 @@ class GetTokenDetailsTest extends TestCase
         $response->assertStatus(401);
     }
 
-    public function testGetTokenDetailsWithUserCredentials()
+    public function testGetUserTokenDetailsWithUserCredentials()
     {
         $response = $this->json('GET', $this->endpoint, [], $this->getAuthorizationHeaders($this->getUserCredentialsToken('mary@example.com', 'secret', 'user-read')));
     
@@ -28,15 +28,7 @@ class GetTokenDetailsTest extends TestCase
         $response->assertStatus(200);
     }
     
-    public function testGetTokenDetailsWithClientCredentials()
-    {
-        $response = $this->json('GET', $this->endpoint, [], $this->getAuthorizationHeaders($this->getClientCredentialsToken('user-read')));
-    
-        $response->assertJson($this->getUnauthenticatedJson());
-        $response->assertStatus(401);
-    }
-    
-    public function testGetTokenDetailsWithWrongUserCredentialsTokenScopes()
+    public function testGeUsertTokenDetailsWithWrongUserCredentialsTokenScopes()
     {
         $response = $this->json('GET', $this->endpoint, [], $this->getAuthorizationHeaders($this->getUserCredentialsToken('chris@example.com', 'secret', 'user-update')));
     
@@ -44,7 +36,7 @@ class GetTokenDetailsTest extends TestCase
         $response->assertStatus(403);
     }
 
-    public function testGetTokenDetailsWithWrongClientCredentialsTokenScopes()
+    public function testGetUserTokenDetailsWithClientCredentialsToken()
     {
         $response = $this->json('GET', $this->endpoint, [], $this->getAuthorizationHeaders($this->getClientCredentialsToken('user-update')));
     

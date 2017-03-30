@@ -111,6 +111,7 @@ abstract class TestCase extends BaseTestCase
     }
     
     protected function getUserCredentialsToken($username, $password, $scopes) {
+        
         $passwordGrantClient = $this->getClientCredentialsDetails();
     
         $result = $this->json('POST', '/oauth/token', [

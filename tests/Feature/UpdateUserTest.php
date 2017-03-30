@@ -7,11 +7,19 @@ use Tests\TestCase;
 class UpdateUserTest extends TestCase
 {
     private $endpoint = '/v1/users/{id}';
-    // user-create doesn't give a user ability to create a new user, it just allows
-    // creation on behalf of a given user
-    private $badScopes = ['user-create', 'admin-read admin-update'];
     
-    private $goodScopes = ['*', 'admin-create', 'admin-read admin-create'];
+    public function testUpdateUserSimple()
+    {
+        $endpoint = str_replace('{id}', 1, $this->endpoint);
+    
+        $params = $this->getUpdateUserParams();
+        $params['email'] = 'chris@example.com';
+    
+        $response = $this->json('PUT', $endpoint, $params, $this->getAuthorizationHeaders($this->getDefaultUserCredentialsToken('user-update')));
+    
+        $response->assertJson(['email' => 'chris@example.com']);
+        $response->assertStatus(200);
+    }
     
     public function testUpdateUserUnauthenticated()
     {
@@ -96,11 +104,13 @@ class UpdateUserTest extends TestCase
         
         $params['password'] = $password2;
         $endpoint = str_replace('{id}', $newUserId, $this->endpoint);
-        $response = $this->json('PUT', $endpoint, $params, $this->getAuthorizationHeaders($this->getUserCredentialsToken($email, $password1, 'user-update')));
-    
+        $token = $this->getUserCredentialsToken($email, $password1, 'user-update');
+        $headers = $this->getAuthorizationHeaders($token);
+        $response = $this->putJson($endpoint, $params, $headers);
+        
         $response->assertJson(['name' => $name, 'email' => $email]);
         $response->assertStatus(200);
-        
+
         /***********************************
          * Check success for new password
          ***********************************/
