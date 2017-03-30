@@ -1,20 +1,13 @@
 <?php
 namespace App\Http\Middleware;
 
-/**
- * Override the default Passport class so that we can allow superuser scope for client_credentials grant
- * 
- * Although Passport does not allow "*" scope to be granted on client_credentials grant, here we assume
- * that an empty array of scopes is equivalent to "*" scope.
- * 
- */
-use Laravel\Passport\Http\Middleware\CheckClientCredentials as PassportCheckClientCredentials;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Auth\Access\AuthorizationException;
+use League\OAuth2\Server\ResourceServer;
 use Symfony\Bridge\PsrHttpMessage\Factory\DiactorosFactory;
 use League\OAuth2\Server\Exception\OAuthServerException;
 
-class CheckForAnyScope
+class CheckForAllScopes
 {
     /**
      * The Resource Server instance.
@@ -68,20 +61,18 @@ class CheckForAnyScope
      * @throws \Illuminate\Auth\AuthenticationException
      */
     protected function validateScopes($psr, $scopes)
-    {
+    {      
         $tokenScopes = $psr->getAttribute('oauth_scopes');
-        
+     
         if (in_array('*', $tokenScopes) || empty($tokenScopes)) {
             return;
         }
-    
+        
         foreach ($scopes as $scope) {
-            if (in_array($scope, $tokenScopes)) {
-                return;
+            if (! in_array($scope, $tokenScopes)) {
+                throw new AuthorizationException('Invalid scope(s) provided.');
             }
         }
-        
-        throw new AuthorizationException('Invalid scope(s) provided.');
     }
 }
 
