@@ -36,7 +36,7 @@ class CheckForAllScopes
      *
      * @throws \Illuminate\Auth\AuthenticationException
      */
-    public function handle($request, Closure $next, ...$scopes)
+    public function handle($request, \Closure $next, ...$scopes)
     {
         $psr = (new DiactorosFactory)->createRequest($request);
     

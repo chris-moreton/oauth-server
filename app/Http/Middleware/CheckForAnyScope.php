@@ -8,11 +8,11 @@ namespace App\Http\Middleware;
  * that an empty array of scopes is equivalent to "*" scope.
  * 
  */
-use Laravel\Passport\Http\Middleware\CheckClientCredentials as PassportCheckClientCredentials;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Symfony\Bridge\PsrHttpMessage\Factory\DiactorosFactory;
 use League\OAuth2\Server\Exception\OAuthServerException;
+use League\OAuth2\Server\ResourceServer;
 
 class CheckForAnyScope
 {
@@ -43,7 +43,7 @@ class CheckForAnyScope
      *
      * @throws \Illuminate\Auth\AuthenticationException
      */
-    public function handle($request, Closure $next, ...$scopes)
+    public function handle($request, \Closure $next, ...$scopes)
     {
         $psr = (new DiactorosFactory)->createRequest($request);
     
