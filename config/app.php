@@ -169,6 +169,7 @@ return [
         Laravel\Tinker\TinkerServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
         App\Providers\TransitionalHashServiceProvider::class,
+        Collective\Remote\RemoteServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -227,7 +228,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'SSH' => Collective\Remote\RemoteFacade::class,
     ],
 
 ];
