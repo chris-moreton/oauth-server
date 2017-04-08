@@ -22,6 +22,14 @@ class UsersTableSeeder extends Seeder
             'email' => 'mary@example.com',
             'password' => bcrypt('secret'),
         ]);
+        
+        App\User::create([
+            'id' => 2000000,
+            'name' => 'phpunit',
+            'email' => 'phpunit@example.com',
+            'password' => bcrypt('secret'),
+        ]);
+        
     }
 }
 

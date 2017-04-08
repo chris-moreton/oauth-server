@@ -33,7 +33,7 @@ class ClientCredentialsGrantTest extends TestCase
                 'grant_type' => 'client_credentials',
                 'client_id' => $clientCredentialsGrantClient->id,
                 'client_secret' => $clientCredentialsGrantClient->secret,
-                'scope' => 'user-read user-update',
+                'scope' => 'user',
             ],
             $this->getPostHeaders()
         );

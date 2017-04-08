@@ -18,7 +18,7 @@ class GetUserTokenDetailsTest extends TestCase
 
     public function testGetUserTokenDetailsWithUserCredentials()
     {
-        $response = $this->json('GET', $this->endpoint, [], $this->getAuthorizationHeaders($this->getUserCredentialsToken('mary@example.com', 'secret', 'user-read')));
+        $response = $this->json('GET', $this->endpoint, [], $this->getAuthorizationHeaders($this->getUserCredentialsToken('mary@example.com', 'secret', 'user')));
     
         $response->assertJson([
             'name' => 'Mary',
@@ -28,9 +28,9 @@ class GetUserTokenDetailsTest extends TestCase
         $response->assertStatus(200);
     }
     
-    public function testGeUsertTokenDetailsWithWrongUserCredentialsTokenScopes()
+    public function testGetUserTokenDetailsWithWrongUserCredentialsTokenScopes()
     {
-        $response = $this->json('GET', $this->endpoint, [], $this->getAuthorizationHeaders($this->getUserCredentialsToken('chris@example.com', 'secret', 'user-update')));
+        $response = $this->json('GET', $this->endpoint, [], $this->getAuthorizationHeaders($this->getUserCredentialsToken('chris@example.com', 'secret', 'verify-password')));
     
         $response->assertJson($this->getWrongScopesJson());
         $response->assertStatus(403);
@@ -38,7 +38,7 @@ class GetUserTokenDetailsTest extends TestCase
 
     public function testGetUserTokenDetailsWithClientCredentialsToken()
     {
-        $response = $this->json('GET', $this->endpoint, [], $this->getAuthorizationHeaders($this->getClientCredentialsToken('user-update')));
+        $response = $this->json('GET', $this->endpoint, [], $this->getAuthorizationHeaders($this->getClientCredentialsToken('user')));
     
         $response->assertJson($this->getUnauthenticatedJson());
         $response->assertStatus(401);

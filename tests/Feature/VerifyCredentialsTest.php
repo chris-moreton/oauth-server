@@ -47,7 +47,7 @@ class VerifyCredentialsTest extends TestCase
     public function testVerifyPasswordWithGoodCredentialsGoodScope()
     {
         $endpoint = str_replace('{email}', 'chris@example.com', $this->endpoint);
-        $response = $this->json('POST', $endpoint, ['password' => 'secret'], $this->getAuthorizationHeaders($this->getClientCredentialsToken('verify-password')));
+        $response = $this->json('POST', $endpoint, ['password' => 'secret'], $this->getAuthorizationHeaders($this->getClientCredentialsToken('admin')));
     
         $response->assertJson(['verified' => true]);
         $response->assertStatus(200);
@@ -56,7 +56,7 @@ class VerifyCredentialsTest extends TestCase
     public function testVerifyPasswordWithGoodCredentialsBadScopes()
     {
         $endpoint = str_replace('{email}', 'chris@example.com', $this->endpoint);
-        $response = $this->json('POST', $endpoint, ['password' => 'secret'], $this->getAuthorizationHeaders($this->getClientCredentialsToken('admin-read')));
+        $response = $this->json('POST', $endpoint, ['password' => 'secret'], $this->getAuthorizationHeaders($this->getClientCredentialsToken('user')));
     
         $response->assertJson($this->getWrongScopesJson());
         $response->assertStatus(403);

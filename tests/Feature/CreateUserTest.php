@@ -8,9 +8,9 @@ class CreateUserTest extends TestCase
 {
     // user-create doesn't give a user ability to create a new user, it just allows
     // creation on behalf of a given user
-    private $badScopes = ['user-create', 'admin-read admin-update'];
+    private $badScopes = ['user', 'verify-password'];
     
-    private $goodScopes = ['*', 'admin-create', 'admin-read admin-create'];
+    private $goodScopes = ['*', 'admin'];
     
     public function testCreateUserUnauthenticated()
     {
@@ -55,7 +55,7 @@ class CreateUserTest extends TestCase
             'password' => $password,
         ];
         
-        $response = $this->json('POST', '/v1/users', $params, $this->getAuthorizationHeaders($this->getClientCredentialsToken('admin-create')));
+        $response = $this->json('POST', '/v1/users', $params, $this->getAuthorizationHeaders($this->getClientCredentialsToken('admin')));
         
         $response->assertJson(['name' => $name, 'email' => $email]);
         $response->assertStatus(201);
@@ -70,7 +70,7 @@ class CreateUserTest extends TestCase
         
         $response = $this->json('POST', '/v1/users',
             $params,
-            $this->getAuthorizationHeaders($this->getDefaultUserCredentialsToken('admin-create'))
+            $this->getAuthorizationHeaders($this->getDefaultUserCredentialsToken('admin'))
         );
         
         $response->assertJson($this->getUserCreatedJson());
@@ -78,7 +78,7 @@ class CreateUserTest extends TestCase
         
         $response = $this->json('POST', '/v1/users',
             $params,
-            $this->getAuthorizationHeaders($this->getDefaultUserCredentialsToken('admin-create'))
+            $this->getAuthorizationHeaders($this->getDefaultUserCredentialsToken('admin'))
         );
 
         $response->assertJson(['error' => 'email already exists: ' . $params['email']]);

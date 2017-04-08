@@ -15,7 +15,7 @@ class UpdateUserTest extends TestCase
         $params = $this->getUpdateUserParams();
         $params['email'] = 'chris@example.com';
     
-        $response = $this->json('PUT', $endpoint, $params, $this->getAuthorizationHeaders($this->getDefaultUserCredentialsToken('user-update')));
+        $response = $this->json('PUT', $endpoint, $params, $this->getAuthorizationHeaders($this->getDefaultUserCredentialsToken('user')));
     
         $response->assertJson(['email' => 'chris@example.com']);
         $response->assertStatus(200);
@@ -36,7 +36,7 @@ class UpdateUserTest extends TestCase
     public function testUpdateIncorrectUser()
     {
         $endpoint = str_replace('{id}', 2, $this->endpoint);
-        $response = $this->json('PUT', $endpoint, $this->getUpdateUserParams(), $this->getAuthorizationHeaders($this->getDefaultUserCredentialsToken('user-update')));
+        $response = $this->json('PUT', $endpoint, $this->getUpdateUserParams(), $this->getAuthorizationHeaders($this->getDefaultUserCredentialsToken('user')));
     
         $response->assertJson($this->getWrongUserJson());
     
@@ -46,7 +46,7 @@ class UpdateUserTest extends TestCase
     public function testUpdateNonExistentUser()
     {
         $endpoint = str_replace('{id}', 999999, $this->endpoint);
-        $response = $this->json('PUT', $endpoint, $this->getUpdateUserParams(), $this->getAuthorizationHeaders($this->getDefaultUserCredentialsToken('user-update')));
+        $response = $this->json('PUT', $endpoint, $this->getUpdateUserParams(), $this->getAuthorizationHeaders($this->getDefaultUserCredentialsToken('user')));
     
         $response->assertJson($this->getUserNotFoundJson());
     
@@ -60,7 +60,7 @@ class UpdateUserTest extends TestCase
         $params = $this->getUpdateUserParams();
         $params['newfield'] = 'hi!';
         
-        $response = $this->json('PUT', $endpoint, $params, $this->getAuthorizationHeaders($this->getDefaultUserCredentialsToken('user-update')));
+        $response = $this->json('PUT', $endpoint, $params, $this->getAuthorizationHeaders($this->getDefaultUserCredentialsToken('user')));
     
         $response->assertJson(['error' => 'Invalid field: newfield']);
     
@@ -84,7 +84,7 @@ class UpdateUserTest extends TestCase
             'password' => $password1
         ];
         
-        $response = $this->json('POST', '/v1/users', $params, $this->getAuthorizationHeaders($this->getClientCredentialsToken('admin-create')));
+        $response = $this->json('POST', '/v1/users', $params, $this->getAuthorizationHeaders($this->getClientCredentialsToken('admin')));
         
         $newUserId = $response->json()['id'];
         
@@ -104,7 +104,7 @@ class UpdateUserTest extends TestCase
         
         $params['password'] = $password2;
         $endpoint = str_replace('{id}', $newUserId, $this->endpoint);
-        $token = $this->getUserCredentialsToken($email, $password1, 'user-update');
+        $token = $this->getUserCredentialsToken($email, $password1, 'user');
         $headers = $this->getAuthorizationHeaders($token);
         $response = $this->putJson($endpoint, $params, $headers);
         
@@ -129,7 +129,7 @@ class UpdateUserTest extends TestCase
     public function testUpdateUserWrongScopes()
     {
         $endpoint = str_replace('{id}', 1, $this->endpoint);
-        $response = $this->json('PUT', $endpoint, $this->getUpdateUserParams(), $this->getAuthorizationHeaders($this->getDefaultUserCredentialsToken('user-read')));
+        $response = $this->json('PUT', $endpoint, $this->getUpdateUserParams(), $this->getAuthorizationHeaders($this->getDefaultUserCredentialsToken('verify-password')));
     
         $response->assertJson($this->getWrongScopesJson());
         $response->assertStatus(403);
@@ -139,7 +139,7 @@ class UpdateUserTest extends TestCase
     {
         $endpoint = str_replace('{id}', 1, $this->endpoint);
         $params  = ['email' => 'mary@example.com'];
-        $response = $this->json('PUT', $endpoint, $params, $this->getAuthorizationHeaders($this->getDefaultUserCredentialsToken('user-update')));
+        $response = $this->json('PUT', $endpoint, $params, $this->getAuthorizationHeaders($this->getDefaultUserCredentialsToken('user')));
     
         $response->assertJson(['error' => 'Email already exists.']);
         $response->assertStatus(400);

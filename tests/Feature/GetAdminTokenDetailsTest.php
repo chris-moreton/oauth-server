@@ -18,30 +18,30 @@ class GetAdminTokenDetailsTest extends TestCase
 
     public function testGetAdminTokenDetailsWithUserCredentialsAndBadScopeToken()
     {
-        $response = $this->json('GET', $this->endpoint, [], $this->getAuthorizationHeaders($this->getUserCredentialsToken('mary@example.com', 'secret', 'user-read')));
+        $response = $this->json('GET', $this->endpoint, [], $this->getAuthorizationHeaders($this->getUserCredentialsToken('mary@example.com', 'secret', 'user')));
     
         $response->assertStatus(403);
     }
 
     public function testGetAdminTokenDetailsWithUserCredentialsAndGoodScopeToken()
     {
-        $response = $this->json('GET', $this->endpoint, [], $this->getAuthorizationHeaders($this->getUserCredentialsToken('mary@example.com', 'secret', 'user-read admin-read')));
+        $response = $this->json('GET', $this->endpoint, [], $this->getAuthorizationHeaders($this->getUserCredentialsToken('mary@example.com', 'secret', 'user admin')));
     
         $response->assertStatus(200);
     }
     
     public function testGetAdminTokenDetailsWithClientCredentialsAndBadScopeToken()
     {
-        $response = $this->json('GET', $this->endpoint, [], $this->getAuthorizationHeaders($this->getClientCredentialsToken('user-update')));
+        $response = $this->json('GET', $this->endpoint, [], $this->getAuthorizationHeaders($this->getClientCredentialsToken('user')));
     
         $response->assertStatus(403);
     }
     
     public function testGetAdminTokenDetailsWithClientCredentialsAndGoodScopeToken()
     {
-        $response = $this->json('GET', $this->endpoint, [], $this->getAuthorizationHeaders($this->getClientCredentialsToken('admin-read admin-update')));
+        $response = $this->json('GET', $this->endpoint, [], $this->getAuthorizationHeaders($this->getClientCredentialsToken('admin')));
     
-        $response->assertJson(['scopes' => ['admin-read', 'admin-update']]);
+        $response->assertJson(['scopes' => ['admin']]);
         $response->assertStatus(200);
     }
 
