@@ -2,6 +2,8 @@
 
 return [
     'token-scopes' => [
+        'admin' => 'Access to perform all actions for users or collections',
+        'user' => 'Access to perform all actions for resources belonging to the owner of the token',
         'user-read' => 'Read the details of the authenticated user',
         'user-create' => 'Create resources owned by the authenticated user',
         'user-update' => 'Update resources owned by the authenticated user',
