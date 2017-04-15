@@ -11,9 +11,9 @@ class CheckUserForAllScopes extends PassportCheckScopes
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param  array  $scopes
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure                 $next
+     * @param  array                    $scopes
      * @return \Illuminate\Http\Response
      */
     public function handle($request, $next, ...$scopes)
@@ -30,5 +30,4 @@ class CheckUserForAllScopes extends PassportCheckScopes
     
         return $next($request);
     }
-
 }

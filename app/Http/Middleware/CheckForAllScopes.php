@@ -19,7 +19,7 @@ class CheckForAllScopes
     /**
      * Create a new middleware instance.
      *
-     * @param  ResourceServer  $server
+     * @param  ResourceServer $server
      * @return void
      */
     public function __construct(ResourceServer $server)
@@ -31,7 +31,7 @@ class CheckForAllScopes
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \Closure $next
+     * @param  \Closure                 $next
      * @return mixed
      *
      * @throws \Illuminate\Auth\AuthenticationException
@@ -40,7 +40,7 @@ class CheckForAllScopes
     {
         $psr = (new DiactorosFactory)->createRequest($request);
     
-        try{
+        try {
             $psr = $this->server->validateAuthenticatedRequest($psr);
         } catch (OAuthServerException $e) {
             throw new AuthenticationException;
@@ -55,13 +55,13 @@ class CheckForAllScopes
      * Validate the scopes on the incoming request.
      *
      * @param  \Psr\Http\Message\ResponseInterface
-     * @param  array  $scopes
+     * @param  array                               $scopes
      * @return void
      *
      * @throws \Illuminate\Auth\AuthenticationException
      */
     protected function validateScopes($psr, $scopes)
-    {      
+    {
         $tokenScopes = $psr->getAttribute('oauth_scopes');
      
         if (in_array('*', $tokenScopes) || empty($tokenScopes)) {
@@ -75,4 +75,3 @@ class CheckForAllScopes
         }
     }
 }
-

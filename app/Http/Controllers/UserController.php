@@ -42,7 +42,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -75,7 +75,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -89,7 +89,10 @@ class UserController extends Controller
         $user = User::where($key, $id)->first();
         
         if (Auth::user()->id != $id && Auth::user()->email != $id) {
-            return response()->json(['error' => 'Token does not belong to requested user.'], Response::HTTP_UNAUTHORIZED);
+            return response()->json(
+                ['error' => 'Token does not belong to requested user.'],
+                Response::HTTP_UNAUTHORIZED
+            );
         }
         
         if ($user) {
@@ -97,14 +100,13 @@ class UserController extends Controller
         }
         
         return response()->json(['error' => 'user not found.'], Response::HTTP_NOT_FOUND);
-       
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int                      $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -116,9 +118,11 @@ class UserController extends Controller
         $user = User::where('id', $id)->first();
 
         if ($user) {
-            
             if (Auth::user()->id != $id && Auth::user()->email != $id) {
-                return response()->json(['error' => 'Token does not belong to requested user.'], Response::HTTP_FORBIDDEN);
+                return response()->json(
+                    ['error' => 'Token does not belong to requested user.'],
+                    Response::HTTP_FORBIDDEN
+                );
             }
             
             $count = 0;
@@ -127,7 +131,10 @@ class UserController extends Controller
                     if ($key == 'email') {
                         if (Auth::user()->email != $value) {
                             if (User::where('email', $value)->first()) {
-                                return response()->json(['error' => 'Email already exists.'], Response::HTTP_BAD_REQUEST);
+                                return response()->json(
+                                    ['error' => 'Email already exists.'],
+                                    Response::HTTP_BAD_REQUEST
+                                );
                             }
                         }
                     }
@@ -149,7 +156,7 @@ class UserController extends Controller
     /**
      * Verify the user's password
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function passwordcheck(Request $request, $email)
@@ -171,7 +178,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

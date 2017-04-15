@@ -30,7 +30,10 @@ class TokenController extends Controller
                 'token' => $user->token(),
             ];
         } else {
-            return response()->json(['error' => 'Token is not associated with any user and no token details are available.'], Response::HTTP_NOT_FOUND);
+            return response()->json(
+                ['error' => 'Token is not associated with any user and no token details are available.'],
+                Response::HTTP_NOT_FOUND
+            );
         }
     }
     
@@ -38,8 +41,10 @@ class TokenController extends Controller
     {
         $psr = (new DiactorosFactory)->createRequest($request);
         
-        $server = new ResourceServer(App::make(AccessTokenRepository::class),
-                'file://'.Passport::keyPath('oauth-public.key'));
+        $server = new ResourceServer(
+            App::make(AccessTokenRepository::class),
+            'file://'.Passport::keyPath('oauth-public.key')
+        );
         
         $psr = $server->validateAuthenticatedRequest($psr);
         

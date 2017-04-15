@@ -3,10 +3,9 @@ namespace App\Http\Middleware;
 
 /**
  * Override the default Passport class so that we can allow superuser scope for client_credentials grant
- * 
+ *
  * Although Passport does not allow "*" scope to be granted on client_credentials grant, here we assume
  * that an empty array of scopes is equivalent to "*" scope.
- * 
  */
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -26,7 +25,7 @@ class CheckForAnyScope
     /**
      * Create a new middleware instance.
      *
-     * @param  ResourceServer  $server
+     * @param  ResourceServer $server
      * @return void
      */
     public function __construct(ResourceServer $server)
@@ -38,7 +37,7 @@ class CheckForAnyScope
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \Closure $next
+     * @param  \Closure                 $next
      * @return mixed
      *
      * @throws \Illuminate\Auth\AuthenticationException
@@ -47,7 +46,7 @@ class CheckForAnyScope
     {
         $psr = (new DiactorosFactory)->createRequest($request);
     
-        try{
+        try {
             $psr = $this->server->validateAuthenticatedRequest($psr);
         } catch (OAuthServerException $e) {
             throw new AuthenticationException;
@@ -62,7 +61,7 @@ class CheckForAnyScope
      * Validate the scopes on the incoming request.
      *
      * @param  \Psr\Http\Message\ResponseInterface
-     * @param  array  $scopes
+     * @param  array                               $scopes
      * @return void
      *
      * @throws \Illuminate\Auth\AuthenticationException
@@ -84,4 +83,3 @@ class CheckForAnyScope
         throw new AuthorizationException('Invalid scope(s) provided.');
     }
 }
-

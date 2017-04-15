@@ -12,9 +12,11 @@ class TransitionalHashServiceProvider extends \Illuminate\Hashing\HashServicePro
      */
     public function register()
     {
-        $this->app->singleton('hash', function () {
-            return new TransitionalHasher;
-        });
+        $this->app->singleton(
+            'hash',
+            function () {
+                return new TransitionalHasher;
+            }
+        );
     }
 }
-

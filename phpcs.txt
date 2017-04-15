@@ -1,0 +1,127 @@
+
+FILE: ...rant/Code/oauth-server/app/Console/Commands/GenerateApiToken.php
+----------------------------------------------------------------------
+FOUND 1 ERROR AFFECTING 1 LINE
+----------------------------------------------------------------------
+ 48 | ERROR | [x] Expected 1 newline at end of file; 0 found
+----------------------------------------------------------------------
+PHPCBF CAN FIX THE 1 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+----------------------------------------------------------------------
+
+
+FILE: .../vagrant/Code/oauth-server/app/Extensions/TransitionalHasher.php
+----------------------------------------------------------------------
+FOUND 9 ERRORS AFFECTING 6 LINES
+----------------------------------------------------------------------
+  6 | ERROR | [x] Opening brace of a class must be on the line after
+    |       |     the definition
+ 11 | ERROR | [x] Expected 0 spaces after opening bracket; 1 found
+ 11 | ERROR | [x] Expected 0 spaces before closing bracket; 1 found
+ 11 | ERROR | [x] Expected 1 space after closing parenthesis; found 9
+ 18 | ERROR | [x] Space after opening parenthesis of function call
+    |       |     prohibited
+ 18 | ERROR | [x] Expected 0 spaces before closing bracket; 1 found
+ 20 | ERROR | [x] Expected 1 space after closing parenthesis; found "
+    |       |      // We found a user with a matching MD5 hash\n     
+    |       |               "
+ 27 | ERROR | [x] Blank line found at end of control structure
+ 38 | ERROR | [x] The closing brace for the class must go on the next
+    |       |     line after the body
+----------------------------------------------------------------------
+PHPCBF CAN FIX THE 9 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+----------------------------------------------------------------------
+
+
+FILE: ...grant/Code/oauth-server/app/Http/Controllers/TokenController.php
+----------------------------------------------------------------------
+FOUND 3 ERRORS AND 1 WARNING AFFECTING 3 LINES
+----------------------------------------------------------------------
+ 33 | WARNING | [ ] Line exceeds 120 characters; contains 152
+    |         |     characters
+ 41 | ERROR   | [x] Opening parenthesis of a multi-line function call
+    |         |     must be the last content on the line
+ 42 | ERROR   | [x] Multi-line function call not indented correctly;
+    |         |     expected 8 spaces but found 16
+ 42 | ERROR   | [x] Closing parenthesis of a multi-line function call
+    |         |     must be on a line by itself
+----------------------------------------------------------------------
+PHPCBF CAN FIX THE 3 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+----------------------------------------------------------------------
+
+
+FILE: ...agrant/Code/oauth-server/app/Http/Controllers/UserController.php
+----------------------------------------------------------------------
+FOUND 2 ERRORS AND 3 WARNINGS AFFECTING 5 LINES
+----------------------------------------------------------------------
+  92 | WARNING | [ ] Line exceeds 120 characters; contains 122
+     |         |     characters
+ 101 | ERROR   | [x] Function closing brace must go on the next line
+     |         |     following the body; found 1 blank lines before
+     |         |     brace
+ 118 | ERROR   | [x] Blank line found at start of control structure
+ 121 | WARNING | [ ] Line exceeds 120 characters; contains 123
+     |         |     characters
+ 130 | WARNING | [ ] Line exceeds 120 characters; contains 122
+     |         |     characters
+----------------------------------------------------------------------
+PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+----------------------------------------------------------------------
+
+
+FILE: ...rant/Code/oauth-server/app/Http/Middleware/CheckForAllScopes.php
+----------------------------------------------------------------------
+FOUND 3 ERRORS AFFECTING 3 LINES
+----------------------------------------------------------------------
+ 43 | ERROR | [x] Expected 1 space after TRY keyword; 0 found
+ 64 | ERROR | [x] Whitespace found at end of line
+ 77 | ERROR | [x] Expected 1 blank line at end of file; 2 found
+----------------------------------------------------------------------
+PHPCBF CAN FIX THE 3 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+----------------------------------------------------------------------
+
+
+FILE: ...grant/Code/oauth-server/app/Http/Middleware/CheckForAnyScope.php
+----------------------------------------------------------------------
+FOUND 4 ERRORS AFFECTING 4 LINES
+----------------------------------------------------------------------
+  6 | ERROR | [x] Whitespace found at end of line
+  9 | ERROR | [x] Whitespace found at end of line
+ 50 | ERROR | [x] Expected 1 space after TRY keyword; 0 found
+ 86 | ERROR | [x] Expected 1 blank line at end of file; 2 found
+----------------------------------------------------------------------
+PHPCBF CAN FIX THE 4 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+----------------------------------------------------------------------
+
+
+FILE: .../Code/oauth-server/app/Http/Middleware/CheckUserForAllScopes.php
+----------------------------------------------------------------------
+FOUND 1 ERROR AFFECTING 1 LINE
+----------------------------------------------------------------------
+ 34 | ERROR | [x] The closing brace for the class must go on the next
+    |       |     line after the body
+----------------------------------------------------------------------
+PHPCBF CAN FIX THE 1 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+----------------------------------------------------------------------
+
+
+FILE: ...t/Code/oauth-server/app/Http/Middleware/CheckUserForAnyScope.php
+----------------------------------------------------------------------
+FOUND 1 ERROR AFFECTING 1 LINE
+----------------------------------------------------------------------
+ 33 | ERROR | [x] The closing brace for the class must go on the next
+    |       |     line after the body
+----------------------------------------------------------------------
+PHPCBF CAN FIX THE 1 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+----------------------------------------------------------------------
+
+
+FILE: ...e/oauth-server/app/Providers/TransitionalHashServiceProvider.php
+----------------------------------------------------------------------
+FOUND 1 ERROR AFFECTING 1 LINE
+----------------------------------------------------------------------
+ 19 | ERROR | [x] Expected 1 blank line at end of file; 2 found
+----------------------------------------------------------------------
+PHPCBF CAN FIX THE 1 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+----------------------------------------------------------------------
+
+
