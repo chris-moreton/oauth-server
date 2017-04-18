@@ -1,5 +1,7 @@
 # Netsensia Authentication Server
 
+#### This has been replaced by a [Lumen version]((https://github.com/chris-moreton/lumen-oauth2-server)) which is significantly faster. No further work will be done to this repository.
+
 [![Build Status](https://travis-ci.org/chris-moreton/oauth2-server.svg?branch=master)](https://travis-ci.org/chris-moreton/oauth2-server)
 
 A ready-to-go PHP/MySQL implementation of an authentication and user management server with oAuth2 support.

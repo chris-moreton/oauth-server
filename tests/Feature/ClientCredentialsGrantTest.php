@@ -1,9 +1,5 @@
 <?php
 
-namespace Tests\Feature;
-
-use Tests\TestCase;
-
 class ClientCredentialsGrantTest extends TestCase
 {
     private $endpoint = '/oauth/token';

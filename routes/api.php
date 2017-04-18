@@ -26,11 +26,11 @@ Route::group(['middleware' => ['client_credentials_all:admin']], function () {
 Route::group(['middleware' => ['auth:api', 'user_scopes_all:user']], function () {
     Route::get('/users/{email}', 'UserController@show');
 });
-    
+
 Route::group(['middleware' => ['client_credentials_all:admin']], function () {
     Route::get('/token-scopes', 'TokenController@adminTokenDetails');
 });
-    
+
 Route::group(['middleware' => ['auth:api', 'user_scopes_all:user']], function () {
     Route::get('/user-token-details', 'TokenController@userTokenDetails');
 });
